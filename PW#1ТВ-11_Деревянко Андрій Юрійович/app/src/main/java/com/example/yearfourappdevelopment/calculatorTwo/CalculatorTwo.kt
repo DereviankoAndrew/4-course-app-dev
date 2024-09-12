@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.yearfourappdevelopment.sharedComposables.PercentageInput
+import com.example.yearfourappdevelopment.utils.roundTo2Decimals
 import com.example.yearfourappdevelopment.utils.toDoubleOrZero
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
@@ -29,14 +30,15 @@ import java.math.RoundingMode
 @Composable
 fun CalculatorTwo(modifier: Modifier = Modifier) {
 
-    var carbon by remember { mutableStateOf("85.5") }
-    var hydrogen by remember { mutableStateOf("11.2") }
-    var oxygen by remember { mutableStateOf("0.8") }
-    var sulfur by remember { mutableStateOf("2.5") }
-    var lowerCalorificValueOfFuelOilCombustibleMass by remember { mutableStateOf("40.4") }
-    var moisture by remember { mutableStateOf("2") }
-    var ash by remember { mutableStateOf("0.15") }
-    var vanadium by remember { mutableStateOf("333.3") }
+    // визначаю змінні
+    var carbon by remember { mutableStateOf("") }
+    var hydrogen by remember { mutableStateOf("") }
+    var oxygen by remember { mutableStateOf("") }
+    var sulfur by remember { mutableStateOf("") }
+    var lowerCalorificValueOfFuelOilCombustibleMass by remember { mutableStateOf("") }
+    var moisture by remember { mutableStateOf("") }
+    var ash by remember { mutableStateOf("") }
+    var vanadium by remember { mutableStateOf("") }
 
     var carbonMazut by remember { mutableDoubleStateOf(0.0) }
     var hydrogenMazut by remember { mutableDoubleStateOf(0.0) }
@@ -47,22 +49,18 @@ fun CalculatorTwo(modifier: Modifier = Modifier) {
 
     var combustionHeat by remember { mutableDoubleStateOf(0.0) }
 
-
-
     var showResults by remember { mutableStateOf(false) }
 
-    // Snackbar state and coroutine scope
+    // Снекбар і корутина для нього, щоб виводити повідомлення про помилки
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
-    fun roundTo2Decimals(value: Double): String {
-        return BigDecimal(value).setScale(2, RoundingMode.HALF_EVEN).toString()
-    }
-
+    // приховує composable "results" з результатами обчислень
     fun resetResults() {
         showResults = false
     }
 
+    // перевіряє, чи всі значення введені
     fun areAllInputsFilled(): Boolean {
         return carbon.isNotEmpty() &&
                 hydrogen.isNotEmpty() &&
@@ -74,6 +72,7 @@ fun CalculatorTwo(modifier: Modifier = Modifier) {
                 vanadium.isNotEmpty()
     }
 
+    // обчислює всі потрібні значення
     fun Calculate() {
         carbonMazut = toDoubleOrZero(carbon) * (100 - toDoubleOrZero(moisture) - toDoubleOrZero(ash)) / 100
         hydrogenMazut = toDoubleOrZero(hydrogen) * (100 - toDoubleOrZero(moisture) - toDoubleOrZero(ash)) / 100
@@ -170,15 +169,14 @@ fun CalculatorTwo(modifier: Modifier = Modifier) {
             }
         )
 
+        // інпут для Double значень, що більше 0.
         TextField(
             value = vanadium,
             onValueChange = {
-                // Check if the input is not empty, can be parsed to Double, and is greater than 0
                 if (it.isNotEmpty() && it.toDoubleOrNull() != null && it.toDouble() > 0) {
                     vanadium = it
                     resetResults()
                 } else if (it.isEmpty()) {
-                    // Allow clearing the input
                     vanadium = it
                 }
             },
@@ -190,6 +188,7 @@ fun CalculatorTwo(modifier: Modifier = Modifier) {
 
         Button(
             onClick = {
+                // валідація введених значень
                 if (!areAllInputsFilled()) {
                     coroutineScope.launch {
                         snackbarHostState.showSnackbar("Будь ласка, заповніть усі " +
@@ -198,17 +197,9 @@ fun CalculatorTwo(modifier: Modifier = Modifier) {
                     return@Button
                 }
 
-//                    if (calculateInputSum() != 100.0) {
-//                        coroutineScope.launch {
-//                            snackbarHostState.showSnackbar("Запевніться, що сума аргументів " +
-//                                    "дорівнює 100.")
-//                        }
-//                        return@Button
-//                    }
+                Calculate()
 
-                    Calculate(
-                    )
-
+                // виводить composable "results" з усіма обчисленими значеннями
                 showResults = true
 
             },
@@ -217,7 +208,7 @@ fun CalculatorTwo(modifier: Modifier = Modifier) {
             Text("Розрахувати")
         }
 
-        // Snackbar Host to display messages
+        // снекбар для виводу повідомлень
         SnackbarHost(
             hostState = snackbarHostState,
             modifier = Modifier.padding(top = 8.dp)
@@ -246,6 +237,7 @@ fun CalculatorTwo(modifier: Modifier = Modifier) {
     }
 }
 
+// composable для виводу результатів обчислень
 @Composable
 fun Results(
     hydrogen: String,

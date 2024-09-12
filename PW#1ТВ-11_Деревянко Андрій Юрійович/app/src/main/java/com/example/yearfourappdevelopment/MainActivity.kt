@@ -31,9 +31,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen() {
-    // State variable to keep track of the selected tab
+    // стейт для індексу обраного табу
     var selectedTabIndex by remember { mutableStateOf(0) }
 
+    // визначаємо таби
     Scaffold(
         topBar = {
             TabRow(
@@ -54,7 +55,7 @@ fun MainScreen() {
             }
         }
     ) { innerPadding ->
-        // Display content based on selected tab index
+        // показуємо composable в залежності від обраного табу
         when (selectedTabIndex) {
             0 -> CalculatorOne(modifier = Modifier.padding(innerPadding))
             1 -> CalculatorTwo(modifier = Modifier.padding(innerPadding))

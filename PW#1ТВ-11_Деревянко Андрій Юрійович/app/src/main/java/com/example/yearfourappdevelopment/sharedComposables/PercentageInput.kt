@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 
+// інпут для відсоткових значень
 @Composable
 fun PercentageInput(label: String, value: String, onValueChange: (String) -> Unit) {
     // Helper function to validate inputs 1 to 6

@@ -19,71 +19,60 @@ import kotlinx.coroutines.launch
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import com.example.yearfourappdevelopment.sharedComposables.PercentageInput
+import com.example.yearfourappdevelopment.utils.roundTo2Decimals
 import com.example.yearfourappdevelopment.utils.toDoubleOrZero
 import java.math.BigDecimal
 import java.math.RoundingMode
 
 class Variable(
-    value: Double = 0.0,
     val description: String = "",
     val sign: String = ""
 ) {
-    var value by mutableStateOf(value)
 }
 
 @Composable
 fun CalculatorOne(modifier: Modifier = Modifier) {
 
-    // State variables for each input
+    // визначаю об'єкти класу "Variable"
     val CarbonWorking = Variable(
-        value = 0.0,
         description = "Вуглець (робоче паливо)",
         sign = "Cw"
     )
     val HydrogenWorking = Variable(
-        value = 0.0,
         description = "Водень (робоче паливо)",
         sign = "Hw"
     )
     val SulfurWorking = Variable(
-        value = 0.0,
         description = "Сірка (робоче паливо)",
         sign = "Sw"
     )
     val OxygenWorking = Variable(
-        value = 0.0,
         description = "Кисень (робоче паливо)",
         sign = "Ow"
     )
     val NitrogenWorking = Variable(
-        value = 0.0,
         description = "Азот (робоче паливо)",
         sign = "Nw"
     )
     val Moisture = Variable(
-        value = 0.0,
         description = "Волога",
         sign = "W"
     )
     val Ash = Variable(
-        value = 0.0,
         description = "Зола",
         sign = "A"
     )
 
-    var HydrogenWorkingInput by remember { mutableStateOf("1.9") }
-    var CarbonWorkingInput by remember { mutableStateOf("21.1") }
-    var SulfurWorkingInput by remember { mutableStateOf("2.6") }
-    var NitrogenWorkingInput by remember { mutableStateOf("0.2") }
-    var OxygenWorkingInput by remember { mutableStateOf("7.1") }
-    var MoistureInput by remember { mutableStateOf("53") }
-    var AshInput by remember { mutableStateOf("14.1") }
+    // визначаю змінні
+    var HydrogenWorkingInput by remember { mutableStateOf("") }
+    var CarbonWorkingInput by remember { mutableStateOf("") }
+    var SulfurWorkingInput by remember { mutableStateOf("") }
+    var NitrogenWorkingInput by remember { mutableStateOf("") }
+    var OxygenWorkingInput by remember { mutableStateOf("") }
+    var MoistureInput by remember { mutableStateOf("") }
+    var AshInput by remember { mutableStateOf("") }
 
     var showResults by remember { mutableStateOf(false) }
-
-    // Snackbar state and coroutine scope
-    val snackbarHostState = remember { SnackbarHostState() }
-    val coroutineScope = rememberCoroutineScope()
 
     var ConversionRatioFromWorkingToDryMass by remember { mutableDoubleStateOf(0.0) }
     var ConversionRatioFromWorkingToCombustibleMass by remember { mutableDoubleStateOf(0.0) }
@@ -106,11 +95,16 @@ fun CalculatorOne(modifier: Modifier = Modifier) {
     var LowerCalorificValueForDryMass by remember { mutableDoubleStateOf(0.0) }
     var LowerCalorificValueForCombustibleMass by remember { mutableDoubleStateOf(0.0) }
 
+    // Снекбар і корутина для нього, щоб виводити повідомлення про помилки
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+
+    // приховує composable "results" з результатами обчислень
     fun resetResults() {
         showResults = false
     }
 
-    // Function to check if all inputs are not empty
+    // перевіряє, чи всі значення введені
     fun areAllInputsFilled(): Boolean {
         return HydrogenWorkingInput.isNotEmpty() &&
                 CarbonWorkingInput.isNotEmpty() &&
@@ -121,6 +115,7 @@ fun CalculatorOne(modifier: Modifier = Modifier) {
                 AshInput.isNotEmpty()
     }
 
+    // обчислює суму введених значень
     fun calculateInputSum(): Double {
         return toDoubleOrZero(CarbonWorkingInput) +
                 toDoubleOrZero(HydrogenWorkingInput) +
@@ -131,10 +126,7 @@ fun CalculatorOne(modifier: Modifier = Modifier) {
                 toDoubleOrZero(AshInput)
     }
 
-    fun roundTo2Decimals(value: Double): String {
-        return BigDecimal(value).setScale(2, RoundingMode.HALF_EVEN).toString()
-    }
-
+    // обчислює всі потрібні значення
     fun Calculate(
         CarbonWorking: Double,
         HydrogenWorking: Double,
@@ -270,9 +262,9 @@ fun CalculatorOne(modifier: Modifier = Modifier) {
             horizontalArrangement = Arrangement.SpaceBetween, // Spreads elements evenly in the row
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Button to validate inputs and log them
             Button(
                 onClick = {
+                    // валідація введених значень
                     if (!areAllInputsFilled()) {
                         coroutineScope.launch {
                             snackbarHostState.showSnackbar("Будь ласка, заповніть усі " +
@@ -299,6 +291,7 @@ fun CalculatorOne(modifier: Modifier = Modifier) {
                         Ash = toDoubleOrZero(AshInput),
                     )
 
+                    // виводить composable "results" з усіма обчисленими значеннями
                     showResults = true
 
                 },
@@ -347,7 +340,7 @@ fun CalculatorOne(modifier: Modifier = Modifier) {
 
 
 
-        // Snackbar Host to display messages
+        // снекбар для виводу повідомлень
         SnackbarHost(
             hostState = snackbarHostState,
             modifier = Modifier.padding(top = 8.dp)
@@ -355,6 +348,7 @@ fun CalculatorOne(modifier: Modifier = Modifier) {
     }
 }
 
+// composable для виводу результатів обчислень
 @Composable
 fun Results(
     HydrogenWorkingInput: String,
