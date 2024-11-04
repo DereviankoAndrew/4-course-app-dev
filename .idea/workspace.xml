@@ -4,7 +4,50 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="72e565a3-cf57-487b-b578-b9b4f4553abe" name="Changes" comment="" />
+    <list default="true" id="72e565a3-cf57-487b-b578-b9b4f4553abe" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lab4/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/proguard-rules.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/androidTest/java/com/example/lab4/ExampleInstrumentedTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/java/com/example/lab4/MainActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/java/com/example/lab4/ui/theme/Color.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/java/com/example/lab4/ui/theme/Theme.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/java/com/example/lab4/ui/theme/Type.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/drawable/ic_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/drawable/ic_launcher_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/mipmap-hdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/mipmap-hdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/mipmap-mdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/mipmap-mdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/mipmap-xhdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/mipmap-xhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/mipmap-xxhdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/values/themes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/xml/backup_rules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/main/res/xml/data_extraction_rules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/app/src/test/java/com/example/lab4/ExampleUnitTest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/gradle/libs.versions.toml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab4/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PW#3ТВ-11_Деревянко Андрій Юрійович/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PW#3ТВ-11_Деревянко Андрій Юрійович/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PW#3ТВ-11_Деревянко Андрій Юрійович/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PW#3ТВ-11_Деревянко Андрій Юрійович/.idea/misc.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,19 +67,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/andriiderevianko/Documents/GitHub/4-course-app-dev",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/andriiderevianko/Documents/GitHub/4-course-app-dev&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
