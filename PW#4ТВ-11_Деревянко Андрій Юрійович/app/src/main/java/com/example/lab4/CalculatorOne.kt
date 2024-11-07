@@ -1,34 +1,33 @@
 package com.example.lab4
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import kotlin.math.exp
-import kotlin.math.pow
-import kotlin.math.sqrt
-import kotlin.math.PI
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            SolarCalculatorApp()
-        }
-    }
-}
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.unit.dp
+import kotlin.math.sqrt
+import androidx.compose.ui.Modifier
 
 @Composable
-fun SolarCalculatorApp() {
+fun CableCalculatorApp(modifier: Modifier = Modifier) {
 
     val focusManager = LocalFocusManager.current
 
@@ -71,6 +70,7 @@ fun SolarCalculatorApp() {
             .padding(16.dp)
             .verticalScroll(rememberScrollState())
     ) {
+        Spacer(modifier = Modifier.height(32.dp))
         OutlinedTextField(
             value = Unom,
             onValueChange = { Unom = it },
@@ -172,12 +172,16 @@ fun SolarCalculatorApp() {
                 val Tm = Tm.toDoubleOrNull() ?: 0.0
                 val Ik = Ik.toDoubleOrNull() ?: 0.0
 
-                val _Im = (Sm / 2.0) / (sqrt(3.0) * Unom)
-                val _Impa = 2 * _Im
+                var _Im = (Sm / 2.0) / (sqrt(3.0) * Unom)
+                var _Impa = 2 * _Im
 
                 val Jek = determineJek(conductorType, conductorMaterial, Tm)
 
-                val _Sek = _Im / Jek
+                var _Sek = _Im / Jek
+
+                _Im = Math.round(_Im * 100) / 100.0
+                _Impa = Math.round(_Impa * 100) / 100.0
+                _Sek = Math.round(_Sek * 100) / 100.0
 
                 Im = _Im.toString()
                 Impa = _Impa.toString()
@@ -190,13 +194,13 @@ fun SolarCalculatorApp() {
         }
 
         // вивід результатів
-        Text(text = "Розрахунковий струм для нормального режиму" + Im,
+        Text(text = "Розрахунковий струм для нормального режиму: " + Im,
             style = MaterialTheme.typography.bodyLarge)
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = "Розрахунковий струм для післяаварійного режиму" + Impa,
+        Text(text = "Розрахунковий струм для післяаварійного режиму: " + Impa,
             style = MaterialTheme.typography.bodyLarge)
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = "Економічний переріз (S ек)" + Sek,
+        Text(text = "Економічний переріз (S ек): " + Sek,
             style = MaterialTheme.typography.bodyLarge)
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -209,6 +213,7 @@ fun SolarCalculatorApp() {
                 .fillMaxWidth()
                 .clickable { focusManager.clearFocus() }
         )
+        Spacer(modifier = Modifier.height(8.dp))
 
         Button(
             onClick = {
@@ -216,7 +221,10 @@ fun SolarCalculatorApp() {
                 val Ik = Ik.toDoubleOrNull() ?: 0.0
                 val Ct = Ct.toDoubleOrNull() ?: 0.0
 
-                val _s_smin = (Ik * 1000 * sqrt(Tf)) / Ct
+                var _s_smin = (Ik * 1000 * sqrt(Tf)) / Ct
+
+                _s_smin = Math.round(_s_smin * 100) / 100.0
+
 
                 s_smin = _s_smin.toString()
 
@@ -226,7 +234,9 @@ fun SolarCalculatorApp() {
             Text("Обчислити переріз за термічною стійкістю до дії струмів КЗ")
         }
 
-        Text(text = "Переріз за термічною стійкістю до дії струмів КЗ" + s_smin,
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(text = "Переріз за термічною стійкістю до дії струмів КЗ: " + s_smin,
             style = MaterialTheme.typography.bodyLarge)
 
         Spacer(modifier = Modifier.height(48.dp))
@@ -261,11 +271,4 @@ fun determineJek(conductorType: String, conductorMaterial: String, Tm: Double): 
     return jekValues[conductorType]?.get(conductorMaterial)?.firstOrNull { (range, jek) ->
         Tm >= range.first && Tm < range.second
     }?.second ?: 0.0
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun SolarCalculatorAppPreview() {
-    SolarCalculatorApp()
 }
