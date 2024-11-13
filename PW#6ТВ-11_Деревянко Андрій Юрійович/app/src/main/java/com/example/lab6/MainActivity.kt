@@ -24,11 +24,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    Lab6Theme {
-//        Greeting("Android")
-//    }
-//}
